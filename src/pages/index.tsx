@@ -5,6 +5,7 @@ import { getImage } from "gatsby-plugin-image"
 import { Row, Col } from "reactstrap"
 
 import Layout from "../components/layout"
+import SEO from "../components/seo"
 import Sidebar from "../components/sidebar"
 import Post from "../components/post"
 
@@ -40,6 +41,10 @@ const IndexPage = ({ data }: PageProps<DataProps>) => {
             render={(data) => {
               return (
                 <div>
+                  <SEO
+                    title="Home"
+                    keywords={[`gatsby`, `application`, `react`]}
+                  />
                   {data.allMarkdownRemark.edges.map(({ node }: any) => (
                     <Post
                       title={node.frontmatter.title}
