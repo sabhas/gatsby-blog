@@ -5,6 +5,7 @@ import { getImage } from "gatsby-plugin-image"
 import { Row, Col } from "reactstrap"
 
 import Layout from "../components/layout"
+import Sidebar from "../components/sidebar"
 import Post from "../components/post"
 
 type DataProps = {
@@ -55,13 +56,7 @@ const IndexPage = ({ data }: PageProps<DataProps>) => {
           />
         </Col>
         <Col md="4">
-          <div
-            style={{
-              width: "100%",
-              height: "100%",
-              backgroundColor: "rgba(0,0,0,0.4)",
-            }}
-          />
+          <Sidebar />
         </Col>
       </Row>
     </Layout>
