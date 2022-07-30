@@ -5,6 +5,9 @@ author: "John Doe"
 path: "/third-post"
 image: "../images/javascript.jpg"
 image_alt: "javascript"
+tags:
+  - design
+  - tutorial
 ---
 
 Let dive into CSS guys, Let dive into CSS guys, Let dive into CSS guys, Let dive into CSS guys, Let dive into CSS guys, Let dive into CSS guys, Let dive into CSS guys, Let dive into CSS guys.

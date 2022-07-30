@@ -19,6 +19,7 @@ type DataProps = {
             date: string
             author: string
             path: string
+            tags: string[]
             image: any
             image_alt: string
           }
@@ -44,6 +45,7 @@ const IndexPage = ({ data }: PageProps<DataProps>) => {
                       title={node.frontmatter.title}
                       path={node.frontmatter.path}
                       author={node.frontmatter.author}
+                      tags={node.frontmatter.tags}
                       body={node.excerpt}
                       date={node.frontmatter.date}
                       image={getImage(node.frontmatter.image)}
@@ -76,6 +78,7 @@ const indexQuery = graphql`
             date(formatString: "MMM Do YYYY")
             author
             path
+            tags
             image_alt
             image {
               childImageSharp {

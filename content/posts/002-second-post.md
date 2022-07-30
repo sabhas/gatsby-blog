@@ -5,6 +5,9 @@ author: "Jane Doe"
 path: "/second-post"
 image: "../images/javascript.jpg"
 image_alt: "javascript"
+tags:
+  - code
+  - design
 ---
 
 Today, we are gonna learn about HTML5, Today, we are gonna learn about HTML5, Today, we are gonna learn about HTML5, Today, we are gonna learn about HTML5, Today, we are gonna learn about HTML5, Today, we are gonna learn about HTML5, Today, we are gonna learn about HTML5.

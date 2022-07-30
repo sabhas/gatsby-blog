@@ -1,13 +1,23 @@
 import React from "react"
-import { Card, CardTitle, CardText, CardSubtitle, CardBody } from "reactstrap"
+import {
+  Badge,
+  Card,
+  CardTitle,
+  CardText,
+  CardSubtitle,
+  CardBody,
+} from "reactstrap"
 import { Link } from "gatsby"
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image"
+
+import { slugify } from "../utils"
 
 type PostProps = {
   title: string
   author: string
   path: string
   date: string
+  tags: string[]
   body: string
   image?: IGatsbyImageData
   imageAlt: string
@@ -18,6 +28,7 @@ const Post = ({
   author,
   path,
   date,
+  tags,
   body,
   image,
   imageAlt,
@@ -38,6 +49,17 @@ const Post = ({
         <span className="text-info">{author}</span>
       </CardSubtitle>
       <CardText>{body}</CardText>
+      <ul className="post-tags">
+        {tags.map((tag) => (
+          <li key={tag}>
+            <Link to={`/tag/${slugify(tag)}`}>
+              <Badge color="primary" className="text-uppercase">
+                {tag}
+              </Badge>
+            </Link>
+          </li>
+        ))}
+      </ul>
       <Link
         to={path}
         className="btn btn-outline-primary float-right text-uppercase"

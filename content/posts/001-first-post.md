@@ -5,6 +5,8 @@ author: "John Doe"
 path: "/first-post"
 image: "../images/javascript.jpg"
 image_alt: "javascript"
+tags:
+  - code
 ---
 
 Welcome to Code Blog, I hope you enjoy the content, Welcome to Code Blog, I hope you enjoy the content, Welcome to Code Blog, I hope you enjoy the content, Welcome to Code Blog, I hope you enjoy the content, Welcome to Code Blog, I hope you enjoy the content.
