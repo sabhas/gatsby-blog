@@ -36,39 +36,29 @@ type DataProps = {
 
 const IndexPage = ({ data }: PageProps<DataProps>) => {
   return (
-    <Layout>
-      <Row>
-        <Col md="8">
-          <StaticQuery
-            query={indexQuery}
-            render={(data) => {
-              return (
-                <div>
-                  <SEO
-                    title="Home"
-                    keywords={[`gatsby`, `application`, `react`]}
-                  />
-                  {data.allMarkdownRemark.edges.map(({ node }: any) => (
-                    <Post
-                      title={node.frontmatter.title}
-                      slug={node.fields.slug}
-                      author={node.frontmatter.author}
-                      tags={node.frontmatter.tags}
-                      body={node.excerpt}
-                      date={node.frontmatter.date}
-                      image={getImage(node.frontmatter.image)}
-                      imageAlt={node.frontmatter.image_alt}
-                    />
-                  ))}
-                </div>
-              )
-            }}
-          />
-        </Col>
-        <Col md="4">
-          <Sidebar />
-        </Col>
-      </Row>
+    <Layout pageTitle="Blog">
+      <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+      <StaticQuery
+        query={indexQuery}
+        render={(data) => {
+          return (
+            <div>
+              {data.allMarkdownRemark.edges.map(({ node }: any) => (
+                <Post
+                  title={node.frontmatter.title}
+                  slug={node.fields.slug}
+                  author={node.frontmatter.author}
+                  tags={node.frontmatter.tags}
+                  body={node.excerpt}
+                  date={node.frontmatter.date}
+                  image={getImage(node.frontmatter.image)}
+                  imageAlt={node.frontmatter.image_alt}
+                />
+              ))}
+            </div>
+          )
+        }}
+      />
     </Layout>
   )
 }
@@ -85,7 +75,6 @@ const indexQuery = graphql`
             title
             date(formatString: "MMM Do YYYY")
             author
-
             tags
             image_alt
             image {

@@ -1,18 +1,19 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
 import Footer from "./footer"
+import Sidebar from "./sidebar"
 import "../styles/index.scss"
 
 import { Row, Col } from "reactstrap"
 
 type Props = {
+  pageTitle: string
   children?: React.ReactNode
 }
 
-const Layout = ({ children }: Props) => (
+const Layout = ({ pageTitle, children }: Props) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -33,8 +34,12 @@ const Layout = ({ children }: Props) => (
         />
         <Header siteTitle={data.site.siteMetadata.title} />
         <div className="container" id="content">
+          <h1>{pageTitle}</h1>
           <Row>
-            <Col>{children}</Col>
+            <Col md="8">{children}</Col>
+            <Col md="4">
+              <Sidebar />
+            </Col>
           </Row>
         </div>
         <Footer />
