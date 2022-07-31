@@ -15,7 +15,7 @@ import { slugify } from "../utils"
 type PostProps = {
   title: string
   author: string
-  path: string
+  slug: string
   date: string
   tags: string[]
   body: string
@@ -26,7 +26,7 @@ type PostProps = {
 const Post = ({
   title,
   author,
-  path,
+  slug,
   date,
   tags,
   body,
@@ -35,14 +35,14 @@ const Post = ({
 }: PostProps) => (
   <Card>
     {image && (
-      <Link to={path}>
+      <Link to={slug}>
         <GatsbyImage image={image} alt={imageAlt} />
       </Link>
     )}
 
     <CardBody>
       <CardTitle>
-        <Link to={path}>{title}</Link>
+        <Link to={slug}>{title}</Link>
       </CardTitle>
       <CardSubtitle>
         <span className="text-info">{date}</span> by{" "}
@@ -61,7 +61,7 @@ const Post = ({
         ))}
       </ul>
       <Link
-        to={path}
+        to={slug}
         className="btn btn-outline-primary float-right text-uppercase"
       >
         Read more

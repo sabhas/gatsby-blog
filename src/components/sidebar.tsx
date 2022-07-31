@@ -67,13 +67,15 @@ const sidebarQuery = graphql`
           id
           frontmatter {
             title
-            path
             image_alt
             image {
               childImageSharp {
                 gatsbyImageData
               }
             }
+          }
+          fields {
+            slug
           }
         }
       }
@@ -89,7 +91,7 @@ const CardForRecentPost = ({ node }: any) => {
   return (
     <Card key={node.id}>
       {image && (
-        <Link to={node.frontmatter.path}>
+        <Link to={node.fields.slug}>
           <GatsbyImage
             className="card-image-top"
             image={image}
@@ -100,7 +102,7 @@ const CardForRecentPost = ({ node }: any) => {
 
       <CardBody>
         <CardTitle>
-          <Link to={node.frontmatter.path}>{node.frontmatter.title}</Link>
+          <Link to={node.fields.slug}>{node.frontmatter.title}</Link>
         </CardTitle>
       </CardBody>
     </Card>
