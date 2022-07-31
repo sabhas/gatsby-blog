@@ -9,11 +9,10 @@ import "../styles/index.scss"
 import { Row, Col } from "reactstrap"
 
 type Props = {
-  pageTitle: string
   children?: React.ReactNode
 }
 
-const Layout = ({ pageTitle, children }: Props) => (
+const Layout = ({ children }: Props) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -34,7 +33,6 @@ const Layout = ({ pageTitle, children }: Props) => (
         />
         <Header siteTitle={data.site.siteMetadata.title} />
         <div className="container" id="content">
-          <h1>{pageTitle}</h1>
           <Row>
             <Col>{children}</Col>
           </Row>

@@ -24,6 +24,9 @@ type DataProps = {
             image: any
             image_alt: string
           }
+          fields: {
+            slug: string
+          }
           excerpt: string
         }
       }
@@ -33,7 +36,7 @@ type DataProps = {
 
 const IndexPage = ({ data }: PageProps<DataProps>) => {
   return (
-    <Layout pageTitle="My Blog">
+    <Layout>
       <Row>
         <Col md="8">
           <StaticQuery
@@ -48,7 +51,7 @@ const IndexPage = ({ data }: PageProps<DataProps>) => {
                   {data.allMarkdownRemark.edges.map(({ node }: any) => (
                     <Post
                       title={node.frontmatter.title}
-                      path={node.frontmatter.path}
+                      slug={node.fields.slug}
                       author={node.frontmatter.author}
                       tags={node.frontmatter.tags}
                       body={node.excerpt}
@@ -82,7 +85,7 @@ const indexQuery = graphql`
             title
             date(formatString: "MMM Do YYYY")
             author
-            path
+
             tags
             image_alt
             image {
@@ -90,6 +93,9 @@ const indexQuery = graphql`
                 gatsbyImageData
               }
             }
+          }
+          fields {
+            slug
           }
           excerpt
         }
