@@ -1,12 +1,12 @@
 import React from "react"
 import { graphql, Link, PageProps } from "gatsby"
 import { Badge, Card, CardBody, CardSubtitle, Row, Col } from "reactstrap"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-import { slugify } from "../utils"
+import { slugify, authors } from "../utils"
 
 type Props = {
   markdownRemark: {
@@ -18,16 +18,25 @@ type Props = {
       date: string
       tags: string[]
       image_alt: string
-      image: any
+      image: IGatsbyImageData
     }
   }
+  file: any
 }
 
 const SinglePost = ({ data }: PageProps<Props>) => {
   const post = data.markdownRemark.frontmatter
+  const author = authors.find((x) => x.name === post.author)
   const image = getImage(data.markdownRemark.frontmatter.image)
+
+  console.log(data)
+
   return (
-    <Layout pageTitle={post.title}>
+    <Layout
+      pageTitle={post.title}
+      author={author}
+      authorImage={getImage(data.file)}
+    >
       <SEO title={post.title} />
       <Card>
         {image && (
@@ -59,7 +68,7 @@ const SinglePost = ({ data }: PageProps<Props>) => {
 }
 
 export const postQuery = graphql`
-  query blogPostBySlug($slug: String!) {
+  query blogPostBySlug($slug: String!, $imageUrl: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
       html
@@ -74,6 +83,11 @@ export const postQuery = graphql`
             gatsbyImageData
           }
         }
+      }
+    }
+    file(relativePath: { eq: $imageUrl }) {
+      childImageSharp {
+        gatsbyImageData
       }
     }
   }

@@ -1,19 +1,24 @@
 import React from "react"
 import { StaticQuery, graphql } from "gatsby"
+import { IGatsbyImageData } from "gatsby-plugin-image"
+
+import { Row, Col } from "reactstrap"
 
 import Header from "./header"
 import Footer from "./footer"
 import Sidebar from "./sidebar"
 import "../styles/index.scss"
 
-import { Row, Col } from "reactstrap"
+import { Author } from "../utils"
 
 type Props = {
+  author?: Author
+  authorImage?: IGatsbyImageData
   pageTitle: string
   children?: React.ReactNode
 }
 
-const Layout = ({ pageTitle, children }: Props) => (
+const Layout = ({ author, authorImage, pageTitle, children }: Props) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -38,7 +43,7 @@ const Layout = ({ pageTitle, children }: Props) => (
           <Row>
             <Col md="8">{children}</Col>
             <Col md="4">
-              <Sidebar />
+              <Sidebar author={author} authorImage={authorImage} />
             </Col>
           </Row>
         </div>

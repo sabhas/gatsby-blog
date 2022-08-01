@@ -1,8 +1,33 @@
+import { GatsbyNode } from "gatsby"
 import path from "path"
-import { slugify } from "./src/utils"
+const { createFilePath, createFileNode } = require(`gatsby-source-filesystem`)
 
-exports.onCreateNode = ({ node, actions }) => {
+import { slugify, authors } from "./src/utils"
+
+type TypeNode = {
+  node: {
+    frontmatter: {
+      author: string
+    }
+    fields: {
+      slug: string
+    }
+  }
+}
+
+type TypeData = {
+  allMarkdownRemark: {
+    edges: TypeNode[]
+  }
+}
+
+export const onCreateNode: GatsbyNode["onCreateNode"] = ({
+  node,
+  getNode,
+  actions,
+}) => {
   const { createNodeField } = actions
+
   if (node.internal.type === "MarkdownRemark") {
     const slugFromTitle = slugify(node.frontmatter.title)
     createNodeField({
@@ -13,11 +38,14 @@ exports.onCreateNode = ({ node, actions }) => {
   }
 }
 
-exports.createPages = ({ actions, graphql }) => {
+export const createPages: GatsbyNode["createPages"] = async ({
+  actions,
+  graphql,
+}) => {
   const { createPage } = actions
   const singlePostTemplate = path.resolve("src/templates/singlePost.tsx")
 
-  return graphql(`
+  const res = await graphql<TypeData>(`
     {
       allMarkdownRemark {
         edges {
@@ -32,20 +60,23 @@ exports.createPages = ({ actions, graphql }) => {
         }
       }
     }
-  `).then((res) => {
-    if (res.errors) return Promise.reject(res.errors)
+  `)
 
-    const posts = res.data.allMarkdownRemark.edges
+  if (res.errors) return Promise.reject(res.errors)
 
-    posts.forEach(({ node }) => {
-      createPage({
-        path: node.fields.slug,
-        component: singlePostTemplate,
-        context: {
-          // Passing slug for template to use to get post
-          slug: node.fields.slug,
-        },
-      })
+  const posts = res.data?.allMarkdownRemark.edges
+
+  posts?.forEach(({ node }) => {
+    createPage({
+      path: node.fields.slug,
+      component: singlePostTemplate,
+      context: {
+        // Passing slug for template to use to get post
+        slug: node.fields.slug,
+        // Find author imageUrl from authors and pass it to the single post template
+        imageUrl: authors.find((x) => x.name === node.frontmatter.author)
+          ?.imageUrl,
+      },
     })
   })
 }

@@ -14,3 +14,5 @@ const AboutPage = () => (
     </p>
   </Layout>
 )
+
+export default AboutPage
