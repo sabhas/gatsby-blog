@@ -49,6 +49,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     singlePost: path.resolve("src/templates/singlePost.tsx"),
     tagsPage: path.resolve("src/templates/tagsPage.tsx"),
     tagPosts: path.resolve("src/templates/tagPost.tsx"),
+    postList: path.resolve("src/templates/postList.tsx"),
   }
 
   const res = await graphql<TypeData>(`
@@ -119,6 +120,27 @@ export const createPages: GatsbyNode["createPages"] = async ({
       component: templates.tagPosts,
       context: {
         tag,
+      },
+    })
+  })
+
+  const postsPerPage = 2
+  const numberOfPages = Math.ceil(posts?.length ?? 0 / postsPerPage)
+
+  Array.from({ length: numberOfPages }).forEach((_, index) => {
+    const isFirstPage = index === 0
+    const currentPage = index + 1
+
+    if (isFirstPage) return
+
+    createPage({
+      path: `/page/${currentPage}`,
+      component: templates.postList,
+      context: {
+        limit: postsPerPage,
+        skip: index * postsPerPage,
+        currentPage,
+        numberOfPages,
       },
     })
   })

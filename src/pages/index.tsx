@@ -1,50 +1,28 @@
 import React from "react"
-import { graphql, PageProps, StaticQuery } from "gatsby"
+import { graphql, StaticQuery } from "gatsby"
 import { getImage } from "gatsby-plugin-image"
-
-import { Row, Col } from "reactstrap"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Sidebar from "../components/sidebar"
 import Post from "../components/post"
+import PaginationLinks from "../components/paginationLinks"
 
-type DataProps = {
-  allMarkdownRemark: {
-    edges: [
-      {
-        node: {
-          id: number
-          frontmatter: {
-            title: string
-            date: string
-            author: string
-            path: string
-            tags: string[]
-            image: any
-            image_alt: string
-          }
-          fields: {
-            slug: string
-          }
-          excerpt: string
-        }
-      }
-    ]
-  }
-}
-
-const IndexPage = ({ data }: PageProps<DataProps>) => {
+const IndexPage = () => {
   return (
     <Layout pageTitle="Blog">
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
       <StaticQuery
         query={indexQuery}
         render={(data) => {
+          const postsPerPage = 2
+          const numberOfPages = Math.ceil(
+            data.allMarkdownRemark.totalCount / postsPerPage
+          )
           return (
             <div>
               {data.allMarkdownRemark.edges.map(({ node }: any) => (
                 <Post
+                  key={node.id}
                   title={node.frontmatter.title}
                   slug={node.fields.slug}
                   author={node.frontmatter.author}
@@ -55,6 +33,7 @@ const IndexPage = ({ data }: PageProps<DataProps>) => {
                   imageAlt={node.frontmatter.image_alt}
                 />
               ))}
+              <PaginationLinks currentPage={1} numberOfPages={numberOfPages} />
             </div>
           )
         }}
@@ -67,7 +46,11 @@ export default IndexPage
 
 const indexQuery = graphql`
   query indexQuery {
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 2
+    ) {
+      totalCount
       edges {
         node {
           id
