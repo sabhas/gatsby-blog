@@ -1,6 +1,6 @@
 import { GatsbyNode } from "gatsby"
 import path from "path"
-const { createFilePath, createFileNode } = require(`gatsby-source-filesystem`)
+import _ from "lodash"
 
 import { slugify, authors } from "./src/utils"
 
@@ -8,6 +8,7 @@ type TypeNode = {
   node: {
     frontmatter: {
       author: string
+      tags: string[]
     }
     fields: {
       slug: string
@@ -43,7 +44,12 @@ export const createPages: GatsbyNode["createPages"] = async ({
   graphql,
 }) => {
   const { createPage } = actions
-  const singlePostTemplate = path.resolve("src/templates/singlePost.tsx")
+
+  const templates = {
+    singlePost: path.resolve("src/templates/singlePost.tsx"),
+    tagsPage: path.resolve("src/templates/tagsPage.tsx"),
+    tagPosts: path.resolve("src/templates/tagPost.tsx"),
+  }
 
   const res = await graphql<TypeData>(`
     {
@@ -52,6 +58,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
           node {
             frontmatter {
               author
+              tags
             }
             fields {
               slug
@@ -69,13 +76,49 @@ export const createPages: GatsbyNode["createPages"] = async ({
   posts?.forEach(({ node }) => {
     createPage({
       path: node.fields.slug,
-      component: singlePostTemplate,
+      component: templates.singlePost,
       context: {
         // Passing slug for template to use to get post
         slug: node.fields.slug,
         // Find author imageUrl from authors and pass it to the single post template
         imageUrl: authors.find((x) => x.name === node.frontmatter.author)
           ?.imageUrl,
+      },
+    })
+  })
+
+  // Get all tags
+  let tags: string[] = []
+  _.each(posts, (edge) => {
+    if (_.get(edge, "node.frontmatter.tags")) {
+      tags.push(...edge.node.frontmatter.tags)
+    }
+  })
+
+  const tagPostCounts: any = {}
+  tags.forEach((tag) => {
+    tagPostCounts[tag] = (tagPostCounts[tag] || 0) + 1
+  })
+
+  tags = _.uniq(tags)
+
+  // Create tags page
+  createPage({
+    path: `/tags`,
+    component: templates.tagsPage,
+    context: {
+      tags,
+      tagPostCounts,
+    },
+  })
+
+  // Create tag posts pages
+  tags.forEach((tag) => {
+    createPage({
+      path: `/tag/${slugify(tag)}`,
+      component: templates.tagPosts,
+      context: {
+        tag,
       },
     })
   })
