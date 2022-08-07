@@ -29,7 +29,7 @@ type Data = {
       }
     ]
   }
-  file: any
+  file: IGatsbyImageData
 }
 
 type Props = {
@@ -46,7 +46,11 @@ const authorPosts = ({ data, pageContext }: Props) => {
   const pageHeader = `${totalCount} Posts by: ${pageContext.authorName}`
 
   return (
-    <Layout pageTitle={pageHeader} author={author} authorImage={data.file}>
+    <Layout
+      pageTitle={pageHeader}
+      author={author}
+      authorImage={getImage(data.file)}
+    >
       {data.allMarkdownRemark.edges.map(({ node }) => (
         <Post
           key={node.id}

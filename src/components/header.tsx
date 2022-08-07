@@ -32,7 +32,7 @@ const Header = ({ siteTitle }: Props) => {
             <NavLink href="/tags">Tags</NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/About">About</NavLink>
+            <NavLink href="/about">About</NavLink>
           </NavItem>
         </Nav>
         <Input

@@ -29,8 +29,6 @@ const SinglePost = ({ data }: PageProps<Props>) => {
   const author = authors.find((x) => x.name === post.author)
   const image = getImage(data.markdownRemark.frontmatter.image)
 
-  console.log(data)
-
   return (
     <Layout
       pageTitle={post.title}

@@ -182,7 +182,7 @@ const CardForRecentPost = ({ node }: any) => {
           <GatsbyImage
             className="card-image-top"
             image={image}
-            alt={node.frontmatter.imageAlt}
+            alt={node.frontmatter.image_alt}
           />
         </Link>
       )}
