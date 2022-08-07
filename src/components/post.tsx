@@ -35,7 +35,7 @@ const Post = ({
 }: PostProps) => (
   <Card>
     {image && (
-      <Link to={slug}>
+      <Link to={`/${slug}`}>
         <GatsbyImage image={image} alt={imageAlt} />
       </Link>
     )}
@@ -46,7 +46,9 @@ const Post = ({
       </CardTitle>
       <CardSubtitle>
         <span className="text-info">{date}</span> by{" "}
-        <span className="text-info">{author}</span>
+        <Link to={`/author/${slugify(author)}`}>
+          <span className="text-info">{author}</span>
+        </Link>
       </CardSubtitle>
       <CardText>{body}</CardText>
       <ul className="post-tags">
@@ -61,7 +63,7 @@ const Post = ({
         ))}
       </ul>
       <Link
-        to={slug}
+        to={`/${slug}`}
         className="btn btn-outline-primary float-right text-uppercase"
       >
         Read more

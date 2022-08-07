@@ -50,6 +50,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
     tagsPage: path.resolve("src/templates/tagsPage.tsx"),
     tagPosts: path.resolve("src/templates/tagPost.tsx"),
     postList: path.resolve("src/templates/postList.tsx"),
+    authorPosts: path.resolve("src/templates/authorPosts.tsx"),
   }
 
   const res = await graphql<TypeData>(`
@@ -141,6 +142,17 @@ export const createPages: GatsbyNode["createPages"] = async ({
         skip: index * postsPerPage,
         currentPage,
         numberOfPages,
+      },
+    })
+  })
+
+  authors.forEach((author) => {
+    createPage({
+      path: `/author/${slugify(author.name)}`,
+      component: templates.authorPosts,
+      context: {
+        authorName: author.name,
+        imageUrl: author.imageUrl,
       },
     })
   })

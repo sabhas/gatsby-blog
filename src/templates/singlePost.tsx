@@ -49,7 +49,9 @@ const SinglePost = ({ data }: PageProps<Props>) => {
         <CardBody>
           <CardSubtitle>
             <span className="text-info">{post.date}</span> by{" "}
-            <span className="text-info">{post.author}</span>
+            <Link to={`/author/${slugify(post.author)}`}>
+              <span className="text-info">{post.author}</span>
+            </Link>
           </CardSubtitle>
           <ul className="post-tags">
             {post.tags.map((tag) => (
