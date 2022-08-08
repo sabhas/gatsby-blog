@@ -1,9 +1,8 @@
-import React, { useState } from "react"
+import React, { useState, useEffect, useDeferredValue } from "react"
+import { navigate } from "gatsby"
 
 import {
   Collapse,
-  FormGroup,
-  Label,
   Input,
   Navbar,
   NavbarToggler,
@@ -19,6 +18,18 @@ type Props = {
 
 const Header = ({ siteTitle }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
+  const search = location.search
+  const searchQueryParam = new URLSearchParams(search).get("search")
+  const [searchQuery, setSearchQuery] = useState(searchQueryParam ?? "")
+  const deferredSearchQuery = useDeferredValue(searchQuery)
+
+  useEffect(() => {
+    if (deferredSearchQuery) {
+      navigate(`/?search=${deferredSearchQuery}`)
+    } else {
+      navigate("/")
+    }
+  }, [deferredSearchQuery])
 
   const toggle = () => setIsOpen(!isOpen)
 
@@ -40,6 +51,8 @@ const Header = ({ siteTitle }: Props) => {
           placeholder="Search"
           type="search"
           style={{ width: "inherit" }}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value.toLowerCase())}
         />
       </Collapse>
     </Navbar>
