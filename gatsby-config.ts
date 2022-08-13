@@ -16,7 +16,6 @@ const config: GatsbyConfig = {
     "gatsby-plugin-sass",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
-    "gatsby-transformer-remark",
     "gatsby-transformer-sharp",
     {
       resolve: "gatsby-source-filesystem",
@@ -30,6 +29,21 @@ const config: GatsbyConfig = {
       options: {
         path: `${__dirname}/content/images/`,
         name: "images",
+      },
+    },
+    {
+      resolve: "gatsby-transformer-remark",
+      options: {
+        plugins: [
+          {
+            resolve: "gatsby-remark-images",
+            options: {
+              maxWidth: 750,
+              linkImagesToOriginal: false,
+              wrapperStyle: "margin-bottom: 1.0725rem;",
+            },
+          },
+        ],
       },
     },
     {
