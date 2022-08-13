@@ -63,6 +63,8 @@ jobs:
         run: npm ci
 
       - name: Build with Gatsby
+        env:
+-          PREFIX_PATHS: "true"
         run: npm run build
 
       - name: Deploy with gh-pages
