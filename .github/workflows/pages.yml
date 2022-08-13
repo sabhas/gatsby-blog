@@ -64,5 +64,9 @@ jobs:
           PREFIX_PATHS: "true"
         run: npm run build
 
-      - name: Deploy
-        run: npm run deploy
+      - name: Deploy with gh-pages
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: |
+          git remote set-url origin https://git:${ACCESS_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npm run deploy
