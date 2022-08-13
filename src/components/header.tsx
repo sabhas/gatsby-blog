@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useDeferredValue } from "react"
-import { navigate } from "gatsby"
+import { navigate, Link } from "gatsby"
 
 import {
   Collapse,
@@ -41,10 +41,14 @@ const Header = ({ siteTitle, location }: Props) => {
       <Collapse isOpen={isOpen} navbar>
         <Nav className="me-auto" navbar>
           <NavItem>
-            <NavLink href="/tags">Tags</NavLink>
+            <NavLink tag={Link} to="/tags">
+              Tags
+            </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink href="/about">About</NavLink>
+            <NavLink tag={Link} to="/about">
+              About
+            </NavLink>
           </NavItem>
         </Nav>
         <Input
