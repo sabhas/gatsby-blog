@@ -8,7 +8,11 @@ import SEO from "../components/seo"
 import Post from "../components/post"
 import PaginationLinks from "../components/paginationLinks"
 
-const IndexPage = () => {
+type Props = {
+  location: Location
+}
+
+const IndexPage = ({ location }: Props) => {
   let pageHeader = "Blog"
   let JSX: React.ReactNode = null
   const search = location.search
@@ -66,7 +70,7 @@ const IndexPage = () => {
   }
 
   return (
-    <Layout pageTitle={pageHeader}>
+    <Layout pageTitle={pageHeader} location={location}>
       <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
       {JSX}
     </Layout>

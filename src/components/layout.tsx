@@ -16,9 +16,16 @@ type Props = {
   authorImage?: IGatsbyImageData
   pageTitle: string
   children?: React.ReactNode
+  location?: Location
 }
 
-const Layout = ({ author, authorImage, pageTitle, children }: Props) => (
+const Layout = ({
+  author,
+  authorImage,
+  pageTitle,
+  children,
+  location,
+}: Props) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -37,7 +44,7 @@ const Layout = ({ author, authorImage, pageTitle, children }: Props) => (
           integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
           crossOrigin="anonymous"
         />
-        <Header siteTitle={data.site.siteMetadata.title} />
+        <Header siteTitle={data.site.siteMetadata.title} location={location} />
         <div className="container" id="content">
           <h1>{pageTitle}</h1>
           <Row>

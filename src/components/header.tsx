@@ -14,11 +14,12 @@ import {
 
 type Props = {
   siteTitle: string
+  location?: Location
 }
 
-const Header = ({ siteTitle }: Props) => {
+const Header = ({ siteTitle, location }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
-  const search = location.search
+  const search = location?.search
   const searchQueryParam = new URLSearchParams(search).get("search")
   const [searchQuery, setSearchQuery] = useState(searchQueryParam ?? "")
   const deferredSearchQuery = useDeferredValue(searchQuery)
@@ -26,7 +27,7 @@ const Header = ({ siteTitle }: Props) => {
   useEffect(() => {
     if (deferredSearchQuery) {
       navigate(`/?search=${deferredSearchQuery}`)
-    } else {
+    } else if (location?.pathname === "/") {
       navigate("/")
     }
   }, [deferredSearchQuery])
