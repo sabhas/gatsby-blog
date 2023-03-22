@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import {
   Card,
   CardTitle,
@@ -6,12 +6,12 @@ import {
   CardText,
   Form,
   FormGroup,
-  Input,
-} from "reactstrap"
-import { graphql, StaticQuery, Link } from "gatsby"
-import { GatsbyImage, IGatsbyImageData, getImage } from "gatsby-plugin-image"
+  Input
+} from 'reactstrap'
+import { graphql, StaticQuery, Link } from 'gatsby'
+import { GatsbyImage, IGatsbyImageData, getImage } from 'gatsby-plugin-image'
 
-import { Author } from "../utils"
+import { Author } from '../utils'
 
 type Props = {
   author?: Author
@@ -24,67 +24,67 @@ const Sidebar = ({ author, authorImage }: Props) => (
       <Card>
         {authorImage && (
           <GatsbyImage
-            className="card-image-top"
+            className='card-image-top'
             image={authorImage}
             alt="author's image"
           />
         )}
 
         <CardBody>
-          <CardTitle className="text-center text-uppercase mb-3">
+          <CardTitle className='text-center text-uppercase mb-3'>
             {author.name}
           </CardTitle>
           <CardText>{author.bio}</CardText>
-          <div className="author-social-links text-center">
+          <div className='author-social-links text-center'>
             <ul>
               <li>
                 <a
-                  href={author.facebook}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="facebook"
+                  href={author.github}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='github'
                 >
-                  <i className="fab fa-facebook-f fa-lg" />
+                  <i className='fab fa-github fa-lg' />
                 </a>
               </li>
               <li>
                 <a
                   href={author.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="twitter"
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='twitter'
                 >
-                  <i className="fab fa-twitter fa-lg" />
+                  <i className='fab fa-twitter fa-lg' />
                 </a>
               </li>
               <li>
                 <a
                   href={author.instagram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="instagram"
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='instagram'
                 >
-                  <i className="fab fa-instagram fa-lg" />
+                  <i className='fab fa-instagram fa-lg' />
                 </a>
               </li>
               <li>
                 <a
                   href={author.google}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="google"
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='google'
                 >
-                  <i className="fab fa-google fa-lg" />
+                  <i className='fab fa-google fa-lg' />
                 </a>
               </li>
               <li>
                 <a
                   href={author.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="linkedin"
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='linkedin'
                 >
-                  <i className="fab fa-linkedin fa-lg" />
+                  <i className='fab fa-linkedin fa-lg' />
                 </a>
               </li>
             </ul>
@@ -94,18 +94,18 @@ const Sidebar = ({ author, authorImage }: Props) => (
     )}
     <Card>
       <CardBody>
-        <CardTitle className="text-center text-uppercase mb-3">
+        <CardTitle className='text-center text-uppercase mb-3'>
           Newsletter
         </CardTitle>
-        <Form className="text-center">
+        <Form className='text-center'>
           <FormGroup>
             <Input
-              type="email"
-              name="email"
-              placeholder="Your email address.."
+              type='email'
+              name='email'
+              placeholder='Your email address..'
             />
           </FormGroup>
-          <button className="btn btn-outline-success text-uppercase">
+          <button className='btn btn-outline-success text-uppercase'>
             Subscribe
           </button>
         </Form>
@@ -113,19 +113,19 @@ const Sidebar = ({ author, authorImage }: Props) => (
     </Card>
     <Card>
       <CardBody>
-        <CardTitle className="text-center text-uppercase">
+        <CardTitle className='text-center text-uppercase'>
           Advertisement
         </CardTitle>
         <img
-          src="https://via.placeholder.com/320x200"
-          alt="Advert"
-          style={{ width: "100%" }}
+          src='https://via.placeholder.com/320x200'
+          alt='Advert'
+          style={{ width: '100%' }}
         />
       </CardBody>
     </Card>
     <Card>
       <CardBody>
-        <CardTitle className="text-center text-uppercase mb-3">
+        <CardTitle className='text-center text-uppercase mb-3'>
           Recent Posts
         </CardTitle>
         <StaticQuery
@@ -180,7 +180,7 @@ const CardForRecentPost = ({ node }: any) => {
       {image && (
         <Link to={node.fields.slug}>
           <GatsbyImage
-            className="card-image-top"
+            className='card-image-top'
             image={image}
             alt={node.frontmatter.image_alt}
           />

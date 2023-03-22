@@ -2,7 +2,7 @@ export interface Author {
   name: string
   imageUrl: string
   bio: string
-  facebook: string
+  github: string
   twitter: string
   instagram: string
   google: string
