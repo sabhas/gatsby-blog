@@ -1,5 +1,11 @@
 .card {
   margin-bottom: 30px;
+
+  .card-image-top {
+    img {
+      object-fit: contain !important;
+    }
+  }
 }
 ul.post-tags {
   padding: 0;
