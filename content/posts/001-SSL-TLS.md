@@ -14,7 +14,7 @@ tags:
 
 ## What is SSL/TLS encryption?
 
-SSL is an internet security protocol used to secure communication between internet users and web servers. However, the SSL protocol is currently deprecated. Transport Layer Security (TLS) is SSL’s successor. TLS was developed by the Internet Engineering Task Force (IETF) and is the correct term that people should start using.
+SSL is an internet security protocol used to secure communication between internet users and web servers. However, the SSL protocol is currently deprecated. [Transport Layer Security (TLS)](understanding-tls-transport-layer-security) is SSL’s successor. TLS was developed by the Internet Engineering Task Force (IETF) and is the correct term that people should start using.
 
 ## How Does SSL/TLS Encryption Work?
 
