@@ -28,39 +28,35 @@ Once the encryption key is shared, it is utilized to encrypt all data sent over 
 
 VPNs are created to offer a secure and encrypted link between two locations, but they do not specify what these locations should be. Therefore, VPNs can be used in several different scenarios.
 
-- **Site-to-Site VPN**: A site-to-site VPN is intended to establish a secure connection between two geographically-separated locations. Today, most security gateways come equipped with VPN functionality, such as a next-generation firewall (NGFW) situated at the network perimeter, which safeguards the corporate network while serving as a VPN gateway. Traffic between the two sites is routed through this gateway, which encrypts the data and transmits it to the other gateway at the other site. The receiving gateway then decrypts the data and forwards it to its intended destination.
+1. **Site-to-Site VPN**: A site-to-site VPN is intended to establish a secure connection between two geographically-separated locations. Today, most security gateways come equipped with VPN functionality, such as a next-generation firewall (NGFW) situated at the network perimeter, which safeguards the corporate network while serving as a VPN gateway. Traffic between the two sites is routed through this gateway, which encrypts the data and transmits it to the other gateway at the other site. The receiving gateway then decrypts the data and forwards it to its intended destination.
 
-- **Remote Access VPN**: A remote access VPN is created to securely connect remote users to a corporate network. For example, when the COVID-19 pandemic emerged in 2020, numerous organizations moved to a remote workforce and set up secure remote access VPNs for their remote clients to connect to critical business operations at the corporate site.
+2. **Remote Access VPN**: A remote access VPN is created to securely connect remote users to a corporate network. For example, when the COVID-19 pandemic emerged in 2020, numerous organizations moved to a remote workforce and set up secure remote access VPNs for their remote clients to connect to critical business operations at the corporate site.
 
-- **VPN as a Service**: A VPN as a Service, also known as a cloud VPN, is a VPN that is hosted in cloud-based infrastructure. In this model, packets from the client enter the Internet from the cloud infrastructure instead of the client's local address. This approach is frequently used in consumer VPNs, allowing users to protect themselves while connecting to the Internet via insecure public Wi-Fi and providing some level of anonymity while accessing the Internet.
+3. **VPN as a Service**: A VPN as a Service, also known as a cloud VPN, is a VPN that is hosted in cloud-based infrastructure. In this model, packets from the client enter the Internet from the cloud infrastructure instead of the client's local address. This approach is frequently used in consumer VPNs, allowing users to protect themselves while connecting to the Internet via insecure public Wi-Fi and providing some level of anonymity while accessing the Internet.
 
 ## Benefits of a VPN
 
 VPNs offer several advantages to both individual users and organizations, such as:
 
-- **Access Control**: Many organizations have systems and resources that are only meant to be accessible to internal users. A VPN allows remote users or sites to obtain "internal" access to these resources since the VPN endpoint is located inside the network firewall. This makes it feasible to grant access to authorized remote users without exposing these resources to the public.
+1. **Access Control**: Many organizations have systems and resources that are only meant to be accessible to internal users. A VPN allows remote users or sites to obtain "internal" access to these resources since the VPN endpoint is located inside the network firewall. This makes it feasible to grant access to authorized remote users without exposing these resources to the public.
 
-- **Security**: VPNs create an encrypted connection between the user/device and the destination network, ensuring that all data transmitted is protected from prying eyes.
+2. **Security**: VPNs create an encrypted connection between the user/device and the destination network, ensuring that all data transmitted is protected from prying eyes.
 
-- **Privacy**: VPNs mask the user's IP address, providing anonymity and preventing websites and services from tracking their online activities.
+3. **Privacy**: VPNs mask the user's IP address, providing anonymity and preventing websites and services from tracking their online activities.
 
-- **Remote Access**: VPNs enable remote workers to connect securely to their company's network, allowing them to access company resources and applications from anywhere.
+4. **Remote Access**: VPNs enable remote workers to connect securely to their company's network, allowing them to access company resources and applications from anywhere.
 
-- **Access to Geo-Restricted Content**: VPNs can allow users to bypass geographic restrictions and access content that may be restricted in their region.
-
-- **Cost Savings**: VPNs can be a cost-effective solution for organizations that need to provide remote access to their employees without having to invest in expensive hardware and infrastructure.
-
-- **Flexibility**: VPNs can be used on a variety of devices and platforms, including laptops, smartphones, and tablets, making them a versatile solution for users who need to access the Internet from different locations and devices.
+5. **Access to Geo-Restricted Content**: VPNs can allow users to bypass geographic restrictions and access content that may be restricted in their region.
 
 ## Is a VPN Secure?
 
 VPNs utilize cryptography to offer security and privacy guarantees, allowing them to satisfy the three criteria of information security:
 
-- **Confidentiality**: Encryption is utilized to safeguard data privacy by encrypting all data transmitted over the public network.
+1. **Confidentiality**: Encryption is utilized to safeguard data privacy by encrypting all data transmitted over the public network.
 
-- **Message Integrity**: Message authentication codes (MACs) ensure that any alterations or errors in transmitted data are detectable. This helps to detect when a message has been tampered with or interfered with in some way, either intentionally or unintentionally.
+2. **Message Integrity**: Message authentication codes (MACs) ensure that any alterations or errors in transmitted data are detectable. This helps to detect when a message has been tampered with or interfered with in some way, either intentionally or unintentionally.
 
-- **Authentication**: The initial authentication and key sharing process authenticate the identity of both endpoints of the VPN connection, preventing unauthorized use of the VPN.
+3. **Authentication**: The initial authentication and key sharing process authenticate the identity of both endpoints of the VPN connection, preventing unauthorized use of the VPN.
 
 By delivering all of the elements of the "CIA triad," VPNs guarantee a secure and private connection for their users.
 
@@ -68,12 +64,12 @@ By delivering all of the elements of the "CIA triad," VPNs guarantee a secure an
 
 VPNs are not a flawless solution, as they have a number of limitations that affect their usability and corporate cybersecurity. These include:
 
-- **Fragmented Visibility**: VPNs provide secure point-to-point connectivity, making it tough for an organization's security team to maintain complete network visibility for effective threat detection and response.
+1. **Fragmented Visibility**: VPNs provide secure point-to-point connectivity, making it tough for an organization's security team to maintain complete network visibility for effective threat detection and response.
 
-- **No Integrated Security**: An organization must deploy additional security solutions behind the VPN to identify and block malicious content and implement additional access controls.
+2. **No Integrated Security**: An organization must deploy additional security solutions behind the VPN to identify and block malicious content and implement additional access controls.
 
-- **Inefficient Routing**: VPNs may take a detour in a "hub and spoke" model to ensure that all traffic passes through the organization's centralized security stack for inspection. As remote work and cloud applications become more prevalent, this may not be the optimal path between the client and the cloud application or the Internet.
+3. **Inefficient Routing**: VPNs may take a detour in a "hub and spoke" model to ensure that all traffic passes through the organization's centralized security stack for inspection. As remote work and cloud applications become more prevalent, this may not be the optimal path between the client and the cloud application or the Internet.
 
-- **Poor Scalability**: As a point-to-point security solution, VPNs scale poorly. For example, the number of site-to-site VPN connections in a fully-connected network grows exponentially with the number of sites, creating a complex network infrastructure that is difficult to deploy, monitor, and secure.
+4. **Poor Scalability**: As a point-to-point security solution, VPNs scale poorly. For example, the number of site-to-site VPN connections in a fully-connected network grows exponentially with the number of sites, creating a complex network infrastructure that is difficult to deploy, monitor, and secure.
 
-- **Endpoint Vulnerabilities**: Endpoints with legitimate VPN access can sometimes be compromised through phishing and other cyber attacks. Since the endpoint has full access to VPN resources, so does the threat actor who has compromised the endpoint.
+5. **Endpoint Vulnerabilities**: Endpoints with legitimate VPN access can sometimes be compromised through phishing and other cyber attacks. Since the endpoint has full access to VPN resources, so does the threat actor who has compromised the endpoint.
