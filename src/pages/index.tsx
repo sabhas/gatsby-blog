@@ -1,22 +1,22 @@
-import React from "react"
-import { graphql, useStaticQuery } from "gatsby"
-import { useFlexSearch } from "react-use-flexsearch"
-import { getImage } from "gatsby-plugin-image"
+import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import { useFlexSearch } from 'react-use-flexsearch'
+import { getImage } from 'gatsby-plugin-image'
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
-import Post from "../components/post"
-import PaginationLinks from "../components/paginationLinks"
+import Layout from '../components/layout'
+import SEO from '../components/seo'
+import Post from '../components/post'
+import PaginationLinks from '../components/paginationLinks'
 
 type Props = {
   location: Location
 }
 
 const IndexPage = ({ location }: Props) => {
-  let pageHeader = "Blog"
+  let pageHeader = 'Blog'
   let JSX: React.ReactNode = null
   const search = location.search
-  const searchQuery = new URLSearchParams(search).get("search")
+  const searchQuery = new URLSearchParams(search).get('search')
 
   const queryData = useStaticQuery(indexQuery)
 
@@ -27,7 +27,7 @@ const IndexPage = ({ location }: Props) => {
     const results = useFlexSearch(searchQuery, index, store)
 
     pageHeader = `${results.length} post${
-      results.length >= 1 ? "" : "s"
+      results.length >= 1 ? '' : 's'
     } found related to "${searchQuery}"`
 
     JSX = results.map((node: any) => (
@@ -44,7 +44,7 @@ const IndexPage = ({ location }: Props) => {
       />
     ))
   } else {
-    const postsPerPage = 2
+    const postsPerPage = 10
     const numberOfPages = Math.ceil(
       queryData.allMarkdownRemark.totalCount / postsPerPage
     )
@@ -71,7 +71,7 @@ const IndexPage = ({ location }: Props) => {
 
   return (
     <Layout pageTitle={pageHeader} location={location}>
-      <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
+      <SEO title='Home' keywords={[`gatsby`, `application`, `react`]} />
       {JSX}
     </Layout>
   )
@@ -83,7 +83,7 @@ const indexQuery = graphql`
   query indexQuery {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      limit: 2
+      limit: 10
     ) {
       totalCount
       edges {
