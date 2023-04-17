@@ -52,6 +52,27 @@ There are several types of proxy servers, each designed for different purposes:
 
 Each type of proxy server has its own strengths and weaknesses, and the choice of proxy server depends on the specific needs and requirements of the user or organization.
 
+## Difference Between proxy and reverse proxy
+
+<table>
+<tr>
+<td style="text-align: center; "><b>Proxy</b></td>
+<td style="text-align: center; "><b>Reverse Proxy</b></td>
+</tr>
+<tr>
+<td>
+A proxy server acts as an intermediary between clients and servers. When a client requests a resource from a server, the proxy server intercepts the request and forwards it to the server on behalf of the client. This allows the client to indirectly communicate with the server and can provide benefits such as caching, load balancing, and content filtering.
+</td>
+<td>
+A reverse proxy server, on the other hand, is a type of proxy server that sits between clients and servers but is used to protect servers from direct client access. When a client makes a request to a reverse proxy server, the reverse proxy server forwards the request to the appropriate server, retrieves the response, and sends it back to the client. This allows the server to remain hidden from direct client access and can provide benefits such as load balancing, SSL termination, and caching.
+</td>
+</tr>
+</table>
+
+</br>
+In summary, while a regular proxy server acts as an intermediary between a client and a server, a reverse proxy server is used to protect servers from direct client access and forwards client requests to the appropriate server.
+</br></br>
+
 ## Risks of Proxy Server
 
 While proxy servers offer a range of benefits, there are also some risks associated with their use. Here are some potential risks of using a proxy server:
