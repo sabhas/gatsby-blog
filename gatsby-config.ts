@@ -1,68 +1,68 @@
-import type { GatsbyConfig } from "gatsby"
+import type { GatsbyConfig } from 'gatsby'
 
 const config: GatsbyConfig = {
-  pathPrefix: "/",
+  pathPrefix: '/gatsby-blog',
   siteMetadata: {
     title: `My Blog`,
-    description: "A blog about advance concepts of web development",
-    author: "Sabir Hassan",
-    siteUrl: `https://blog.sabhas.me`,
+    description: 'A blog about advance concepts of web development',
+    author: 'Sabir Hassan',
+    siteUrl: `https://blog.sabhas.me`
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
   // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: [
-    "gatsby-plugin-react-helmet",
-    "gatsby-plugin-sass",
-    "gatsby-plugin-image",
-    "gatsby-plugin-sharp",
-    "gatsby-transformer-sharp",
+    'gatsby-plugin-react-helmet',
+    'gatsby-plugin-sass',
+    'gatsby-plugin-image',
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/content/posts/`,
-        name: "posts",
-      },
+        name: 'posts'
+      }
     },
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/content/images/`,
-        name: "images",
-      },
+        name: 'images'
+      }
     },
     {
-      resolve: "gatsby-transformer-remark",
+      resolve: 'gatsby-transformer-remark',
       options: {
         plugins: [
           {
-            resolve: "gatsby-remark-images",
+            resolve: 'gatsby-remark-images',
             options: {
               maxWidth: 750,
               linkImagesToOriginal: false,
-              wrapperStyle: "margin-bottom: 1.0725rem;",
-            },
-          },
-        ],
-      },
+              wrapperStyle: 'margin-bottom: 1.0725rem;'
+            }
+          }
+        ]
+      }
     },
     {
-      resolve: "gatsby-plugin-local-search",
+      resolve: 'gatsby-plugin-local-search',
       options: {
         // A unique name for the search index. This should be descriptive of
         // what the index contains. This is required.
-        name: "posts",
+        name: 'posts',
 
         // Set the search engine to create the index. This is required.
         // The following engines are supported: flexsearch, lunr
-        engine: "flexsearch",
+        engine: 'flexsearch',
 
         // Provide options to the engine. This is optional and only recommended
         // for advanced users.
         //
         // Note: Only the flexsearch engine supports options.
-        engineOptions: "speed",
+        engineOptions: 'speed',
 
         // GraphQL query used to fetch all data for the search index. This is
         // required.
@@ -94,12 +94,12 @@ const config: GatsbyConfig = {
 
         // Field used as the reference value for each document.
         // Default: 'id'.
-        ref: "id",
+        ref: 'id',
 
         // List of keys to index. The values of the keys are taken from the
         // normalizer function below.
         // Default: all fields
-        index: ["title", "excerpt"],
+        index: ['title', 'excerpt'],
 
         // List of keys to store and make available in your UI. The values of
         // the keys are taken from the normalizer function below.
@@ -120,11 +120,11 @@ const config: GatsbyConfig = {
             tags: node.frontmatter.tags,
             image_alt: node.frontmatter.image_alt,
             image: node.frontmatter.image,
-            excerpt: node.excerpt,
-          })),
-      },
-    },
-  ],
+            excerpt: node.excerpt
+          }))
+      }
+    }
+  ]
 }
 
 export default config
