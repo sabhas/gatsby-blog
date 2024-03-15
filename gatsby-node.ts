@@ -4,7 +4,7 @@ import _ from "lodash"
 
 import { slugify, authors } from "./src/utils"
 
-type TypeNode = {
+interface MarkdownRemarkNode {
   node: {
     frontmatter: {
       author: string
@@ -16,15 +16,14 @@ type TypeNode = {
   }
 }
 
-type TypeData = {
+interface MarkdownQueryData {
   allMarkdownRemark: {
-    edges: TypeNode[]
+    edges: MarkdownRemarkNode[]
   }
 }
 
 export const onCreateNode: GatsbyNode["onCreateNode"] = ({
   node,
-  getNode,
   actions,
 }) => {
   const { createNodeField } = actions
@@ -53,8 +52,8 @@ export const createPages: GatsbyNode["createPages"] = async ({
     authorPosts: path.resolve("src/templates/authorPosts.tsx"),
   }
 
-  const res = await graphql<TypeData>(`
-    {
+  const res = await graphql<MarkdownQueryData>(`
+    query AllMarkdownData{
       allMarkdownRemark {
         edges {
           node {
@@ -71,51 +70,47 @@ export const createPages: GatsbyNode["createPages"] = async ({
     }
   `)
 
-  if (res.errors) return Promise.reject(res.errors)
+  if (res.errors) {
+    console.error("GraphQL query error:", res.errors)
+    throw new Error("GraphQL query failed")
+  }
 
-  const posts = res.data?.allMarkdownRemark.edges
+  const posts = res.data?.allMarkdownRemark.edges || []
 
-  posts?.forEach(({ node }) => {
+  // Create individual post pages
+  posts.forEach(({ node }) => {
     createPage({
       path: node.fields.slug,
       component: templates.singlePost,
       context: {
-        // Passing slug for template to use to get post
         slug: node.fields.slug,
-        // Find author imageUrl from authors and pass it to the single post template
-        imageUrl: authors.find((x) => x.name === node.frontmatter.author)
-          ?.imageUrl,
+        imageUrl: authors.find((x) => x.name === node.frontmatter.author)?.imageUrl,
       },
     })
   })
 
-  // Get all tags
-  let tags: string[] = []
-  _.each(posts, (edge) => {
-    if (_.get(edge, "node.frontmatter.tags")) {
-      tags.push(...edge.node.frontmatter.tags)
+  // Create tag pages
+  const allTags: string[] = []
+  posts.forEach(({ node }) => {
+    if (node.frontmatter.tags) {
+      allTags.push(...node.frontmatter.tags)
     }
   })
 
-  const tagPostCounts: any = {}
-  tags.forEach((tag) => {
-    tagPostCounts[tag] = (tagPostCounts[tag] || 0) + 1
-  })
+  const tagPostCounts = _.countBy(allTags)
+  const uniqueTags = _.uniq(allTags)
 
-  tags = _.uniq(tags)
-
-  // Create tags page
   createPage({
     path: `/tags`,
     component: templates.tagsPage,
     context: {
-      tags,
+      tags: uniqueTags,
       tagPostCounts,
     },
   })
 
-  // Create tag posts pages
-  tags.forEach((tag) => {
+  // Create tag post pages
+  uniqueTags.forEach((tag) => {
     createPage({
       path: `/tag/${slugify(tag)}`,
       component: templates.tagPosts,
@@ -125,27 +120,27 @@ export const createPages: GatsbyNode["createPages"] = async ({
     })
   })
 
+  // Create paginated post list
   const postsPerPage = 2
-  const numberOfPages = Math.ceil(posts?.length ?? 0 / postsPerPage)
+  const numberOfPages = Math.ceil(posts.length / postsPerPage)
 
   Array.from({ length: numberOfPages }).forEach((_, index) => {
-    const isFirstPage = index === 0
     const currentPage = index + 1
-
-    if (isFirstPage) return
+    const skip = index * postsPerPage
 
     createPage({
       path: `/page/${currentPage}`,
       component: templates.postList,
       context: {
         limit: postsPerPage,
-        skip: index * postsPerPage,
+        skip,
         currentPage,
         numberOfPages,
       },
     })
   })
 
+  // Create author pages
   authors.forEach((author) => {
     createPage({
       path: `/author/${slugify(author.name)}`,
