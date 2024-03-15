@@ -129,7 +129,7 @@ const Sidebar = ({ author, authorImage }: Props) => (
           Recent Posts
         </CardTitle>
         <StaticQuery
-          query={sidebarQuery}
+          query={SidebarQuery}
           render={(data) => (
             <div>
               {data.allMarkdownRemark.edges.map(({ node }: any) => (
@@ -143,8 +143,8 @@ const Sidebar = ({ author, authorImage }: Props) => (
   </div>
 )
 
-const sidebarQuery = graphql`
-  query sidebarQuery {
+const SidebarQuery = graphql`
+  query SidebarQuery {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: 3

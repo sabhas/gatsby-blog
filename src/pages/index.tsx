@@ -18,7 +18,7 @@ const IndexPage = ({ location }: Props) => {
   const search = location.search
   const searchQuery = new URLSearchParams(search).get('search')
 
-  const queryData = useStaticQuery(indexQuery)
+  const queryData = useStaticQuery(IndexPageQuery)
 
   if (searchQuery) {
     const index = queryData.localSearchPosts.index
@@ -79,8 +79,8 @@ const IndexPage = ({ location }: Props) => {
 
 export default IndexPage
 
-const indexQuery = graphql`
-  query indexQuery {
+const IndexPageQuery = graphql`
+  query IndexPageQuery {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: 10

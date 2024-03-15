@@ -19,7 +19,7 @@ const SEO = ({
 }: Props) => {
   return (
     <StaticQuery
-      query={detailsQuery}
+      query={SEOQuery}
       render={(data) => {
         const metaDescription =
           description || data.site.siteMetadata.description
@@ -82,8 +82,8 @@ const SEO = ({
 
 export default SEO
 
-const detailsQuery = graphql`
-  query DefaultSEOQuery {
+const SEOQuery = graphql`
+  query SEOQuery {
     site {
       siteMetadata {
         title

@@ -68,8 +68,8 @@ const authorPosts = ({ data, pageContext }: Props) => {
   )
 }
 
-export const authorQuery = graphql`
-  query ($authorName: String!, $imageUrl: String!) {
+export const authorPostsQuery = graphql`
+  query authorPostsQuery($authorName: String!, $imageUrl: String!) {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { author: { eq: $authorName } } }

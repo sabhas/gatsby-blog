@@ -69,8 +69,8 @@ const PostList = ({ data, pageContext }: Props) => {
   )
 }
 
-export const postListQuery = graphql`
-  query postListQuery($skip: Int!, $limit: Int!) {
+export const PostListQuery = graphql`
+  query PostListQuery($skip: Int!, $limit: Int!) {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       limit: $limit

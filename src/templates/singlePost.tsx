@@ -67,8 +67,8 @@ const SinglePost = ({ data }: PageProps<Props>) => {
   )
 }
 
-export const postQuery = graphql`
-  query blogPostBySlug($slug: String!, $imageUrl: String!) {
+export const SinglePostQuery = graphql`
+  query SinglePostQuery($slug: String!, $imageUrl: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
       html
